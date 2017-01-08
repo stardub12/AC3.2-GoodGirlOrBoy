@@ -37,6 +37,19 @@ class SocialViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     let pickerData = ["Throwing", "Running in the house", "Sharing", "Clearing the table", "Finishing dinner", "Hitting", "Saying 'thank you' ", "Biting", "Apologizing", "Doing homework"]
     
+    enum Action: String {
+        case Throwing = "Throwing"
+        case Running = "Running in the house"
+        case Sharing = "Sharing"
+        case Cleanliness = "Clearing the table"
+        case Eating = "Finishing dinner"
+        case Hitting = "Hitting"
+        case Manners = "Saying 'thank you' "
+        case Biting = "Biting"
+        case Apologizing = "Apologizing"
+        case Studying = "Doing homework"
+    }
+    
     /// command + option + forward slash to add documentation(description)
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,18 +88,24 @@ class SocialViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             let currentDate = dateFormatter.string(from: date as Date)
             dateLabel.text = "\(currentDate)"
         }
+        
         //log label
         if let name = socialEntry?.name {
             childLogLabel.text = "Entries for \(name)"
         }
+        
         //pickerView
         behaviorLabel.text = pickerData[0]
-        //positiveOrNegative
-        positiveOrNegative.text = "Negative"
         
+        //positiveOrNegative
+        if (behaviorLabel.text == Action.Throwing.rawValue) || (behaviorLabel.text == Action.Biting.rawValue) || (behaviorLabel.text == Action.Hitting.rawValue) || (behaviorLabel.text == Action.Running.rawValue) {
+            positiveOrNegative.text = "Negative"
+        } else {
+            positiveOrNegative.text = "Postitive"
+        }
     }
 
-    
+    //This is the major functionality issue...
         @IBAction func saveButtonTapped(_ sender: UIButton) {
             print("save button tapped")
             let child = Child(context: context)
@@ -136,9 +155,11 @@ class SocialViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newCell", for: indexPath) 
-                let entry = controller.object(at: indexPath)
-                cell.textLabel?.text = "\(entry.action): \(entry.behavior)"
-                cell.detailTextLabel?.text = "\(dateLabel.text)"
+//                let entry = controller.object(at: indexPath)
+        
+        //using the labels (instead of controller) so that data can appear in the tableview
+                cell.textLabel?.text = "\(behaviorLabel.text!): \(positiveOrNegative.text!)"
+                cell.detailTextLabel?.text = "\(dateLabel.text!)"
 
         return cell
     }
