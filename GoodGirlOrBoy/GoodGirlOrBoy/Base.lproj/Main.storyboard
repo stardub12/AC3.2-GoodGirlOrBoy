@@ -36,7 +36,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Qd9-HU-ApF">
-                        <barButtonItem key="leftBarButtonItem" systemItem="edit" id="aBb-x4-zvs"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gm4-mW-Rn2">
                             <connections>
                                 <action selector="addChild:" destination="35K-bJ-eSt" id="2i9-S7-NW9"/>
@@ -45,7 +44,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="addButton" destination="gm4-mW-Rn2" id="4ha-vu-cbr"/>
-                        <outlet property="editButton" destination="aBb-x4-zvs" id="cIH-lo-PGL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Crx-FK-0Ca" userLabel="First Responder" sceneMemberID="firstResponder"/>

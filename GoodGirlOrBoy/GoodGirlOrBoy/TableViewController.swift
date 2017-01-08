@@ -12,7 +12,7 @@ import CoreData
 class TableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     @IBOutlet weak var addButton: UIBarButtonItem!
-    @IBOutlet weak var editButton: UIBarButtonItem!
+//    @IBOutlet weak var editButton: UIBarButtonItem!
 
     private var controller: NSFetchedResultsController<Child>!
     
@@ -25,6 +25,7 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Good Girl or Boy"
+//        editButton = self.editButtonItem
         
         let request: NSFetchRequest<Child> = Child.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: #keyPath(Child.name), ascending: true)]
@@ -129,6 +130,11 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
         }
     }
     
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         self.tableView.beginUpdates()
     }
@@ -163,7 +169,7 @@ class TableViewController: UITableViewController, NSFetchedResultsControllerDele
         self.tableView.endUpdates()
     }
     
-   
+    
      // MARK: - Navigation
      
      // In a storyboard-based application, you will often want to do a little preparation before navigation
